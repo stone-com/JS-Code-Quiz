@@ -17,7 +17,8 @@ button {
 }
 .start-btn,
 .rules-box,
-.quiz-container {
+.quiz-container,
+.result-container {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -35,13 +36,14 @@ button {
 }
 /* styling of rules display */
 .rules-box {
-  display: none;
+
   width: fit-content;
   background: #fff;
-  /* text-align: center; */
   border-radius: 15px;
   border: 2px solid black;
   padding: 20px;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.9);
 }
 /* rule header styling */
 .rules-box .rules-header {
@@ -86,13 +88,16 @@ button {
   width: 70%;
   background: #fff;
   border-radius: 5%;
+  padding: 15px;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.9);
 }
 .quiz-container header {
   position: relative;
   z-index: 1;
   height: 70px;
   padding: 0 30px;
-  background: #fff;
+  background: lightblue;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -161,24 +166,69 @@ button {
   box-shadow: 2px 2px 2px 1px black;
 }
 
-/* footer/ running score styling */
+/* footer/ total question styling */
 
 footer {
   height: 60px;
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 }
 
-.score span {
+.question-total span {
   display: flex;
 }
 
-.score span p {
+.question-total span p {
   font-weight: bold;
   padding: 0 5px;
 }
 
-.score span p:first-child {
+.question-total span p:first-child {
+  padding-left: 0px;
+}
+
+.result-container {
+  background: white;
+  width: 450px;
+  padding: 30px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  text-align: center;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.9);
+}
+
+.complete-message {
+  font-size: 25px;
+  font-weight: 400;
+}
+
+.score-text span {
+  display: flex;
+  margin: 10px;
+  font-size: 18px;
+}
+.score-text span p {
+  padding: 0 4px;
+}
+
+.result-container .buttons {
+  display: flex;
+  margin: 25px 0;
+}
+
+.result-container .buttons button {
+  margin: 0 5px;
+  height: 50px;
+  width: 120px;
+  border: 1px solid black;
+  border-radius: 15px;
+  margin-top: 15px;
+  font-size: 18px;
+  padding: 5px;
 }
