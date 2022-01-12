@@ -1,7 +1,184 @@
 /* CSS Reset */
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    position: relative;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  background: lightblue;
+}
+
+ul {
+  list-style: none;
+}
+/* start button div positioning */
+button {
+  cursor: pointer;
+}
+.start-btn,
+.rules-box,
+.quiz-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+/* start button styling */
+.start-btn button {
+  font-size: 40px;
+  font-weight: bold;
+  padding: 15px 30px;
+  color: white;
+  background: blue;
+  border-radius: 15px;
+  box-shadow: 2px 2px 2px 1px black;
+}
+/* styling of rules display */
+.rules-box {
+  display: none;
+  width: fit-content;
+  background: #fff;
+  /* text-align: center; */
+  border-radius: 15px;
+  border: 2px solid black;
+  padding: 20px;
+}
+/* rule header styling */
+.rules-box .rules-header {
+  height: 60px;
+  width: 100%;
+  border-bottom: 2px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 40px;
+}
+/* rule list items styling */
+.rules-box .rule-list {
+  padding: 15px 60px;
+}
+
+.rules-box .rule-list .rule {
+  margin: 15px 0;
+  font-size: 23px;
+}
+/* rule button container and button styling */
+.rules-box .buttons {
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 40px;
+  border-top: 2px solid;
+}
+.rules-box .buttons button {
+  margin: 0 5px;
+  height: 50px;
+  width: 90px;
+  border: 1px solid black;
+  border-radius: 15px;
+  margin-top: 15px;
+  font-size: 18px;
+}
+/* styling quiz box */
+.quiz-container {
+  width: 70%;
+  background: #fff;
+  border-radius: 5%;
+}
+.quiz-container header {
+  position: relative;
+  z-index: 1;
+  height: 70px;
+  padding: 0 30px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 5px;
+  box-shadow: 0px 1px 0px 1px rgba(0, 0, 0, 0.5);
+}
+
+.quiz-container header .title {
+  font-size: 23px;
+  font-weight: bold;
+}
+
+.quiz-container header .timer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 150px;
+  background-color: lightgreen;
+  height: 40px;
+  border: 1px solid black;
+  padding: 9px;
+  border-radius: 5px;
+}
+.quiz-container header .timer .timer-label {
+  font-weight: 300;
+  font-size: 18px;
+}
+
+.quiz-container header .timer .time-seconds {
+  font-size: 21px;
+  font-weight: bold;
+}
+
+.quiz-container section {
+  padding: 30px;
+  background: #fff;
+}
+/* quiz question and answer styling */
+.question-text {
+  font-size: 30px;
+  font-weight: 500;
+}
+
+.choice-list {
+  padding: 20px 0;
+  display: block;
+}
+.choice {
+  background: lightblue;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  font-size: 20px;
+  transition: all 0.5s;
+}
+.choice:last-child {
+  margin-bottom: 0px;
+}
+
+.choice:hover {
+  box-shadow: 2px 2px 2px 1px black;
+}
+
+/* footer/ running score styling */
+
+footer {
+  height: 60px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.score span {
+  display: flex;
+}
+
+.score span p {
+  font-weight: bold;
+  padding: 0 5px;
+}
+
+.score span p:first-child {
 }
