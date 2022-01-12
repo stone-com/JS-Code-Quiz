@@ -33,6 +33,7 @@ button {
   background: blue;
   border-radius: 15px;
   box-shadow: 2px 2px 2px 1px black;
+  z-index: 1;
 }
 /* styling of rules display */
 .rules-box {
@@ -231,4 +232,13 @@ footer {
   margin-top: 15px;
   font-size: 18px;
   padding: 5px;
+}
+
+/* active class to show and hide different elements*/
+
+.active{
+    opacity: 1;
+    z-index: 5;
+    pointer-events: auto;
+    transform: translate(-50%, -50%) scale(1);
 }
