@@ -34,8 +34,8 @@ continueBtn.addEventListener('click', function() {
     quizContainer.classList.add('active');
     //calls functions to display questions and start timer
     displayQuestions(0);
-    questionCounter(1);
-    startTimer(60);
+    // questionCounter(1);
+    // startTimer(60);
 });
 
 //function to get quiz questions from array and display them on html page
@@ -55,8 +55,29 @@ function displayQuestions(i) {
     questionText.innerHTML = questionNew;
     choiceList.innerHTML = choicesNew;
 
-    let choice = choiceList.querySelectorAll('choice');
-    //when any choice is clicked, the answer selected function will be called, with the value of the seleceted answer.
-    choice.addEventListener('click', answerSelected(this));
+    let choice = choiceList.querySelectorAll('.choice');
+    //loop through all choices and set onclick attribute to call answerselected function (i hope this works)
+    for (i=0; i < choice.length; i++) {
+        choice[i].setAttribute("onclick", "answerSelected(this)");
+    }
+}
 
+//function to handle user picking a choice.
+
+function answerSelected(x){
+    let correctAnswer = questions[questionCount].answer;
+    let userAnswer = x.textContent;
+
+    let allChoices = choiceList.children.length;
+
+    if(userAnswer == correctAnswer) {
+        score++; //add 1 to score if they get the right answer
+        x.classList.add('right-answer'); //add right answer class to change color to green
+        console.log('Correct answer. You have gotten ' + score + 'right answers so far.');
+    } else {
+        x.classList.add('wrong-answer'); // add wrong answer class to change color to red
+        console.log('WRONG!!!');
+
+        //loop through choice list and find right answer, then color it green.
+    }
 }
