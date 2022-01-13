@@ -3,7 +3,7 @@
 const startBtn = document.querySelector('#start');
 const rulesContainer = document.querySelector('.rules-box');
 const exitBtn = document.querySelector(".buttons .quit");
-const continueBtn = document.querySelector(".buttons .continue");
+const continueBtn = document.querySelector(".continue");
 const quizContainer = document.querySelector(".quiz-container");
 const choiceList = document.querySelector(".choice-list");
 const resultContainer = document.querySelector(".result-container");
@@ -12,6 +12,12 @@ const questionText = document.querySelector('.question-text')
 const timeLabel = document.querySelector('.timer-label');
 const timeSeconds = document.querySelector('.time-seconds');
 const bottomCounter = document.querySelector('.question-total');
+const nameInput = document.querySelector('#name');
+const submitBtn = document.querySelector('#submit-btn');
+const highscoreContainer = document.querySelector('.highscore-container');
+
+// const replayBtn = document.querySelector('#replay');
+const replayBtn = document.querySelectorAll('.replay');
 
 let timeLeft = 60;
 let score = 0;
@@ -19,6 +25,8 @@ let questionCount = 0;
 let questionNumber = 1;
 let counter; //used for timer
 let penalty = false; //used to penalize time for a wrong answer
+
+let gameOver = false; //used to stop timer if game ends
 
 
 // if start button is clicked, add active class and show rules.
@@ -28,18 +36,64 @@ startBtn.addEventListener('click', function() {
 // if the exit button on rule page is clicked, remove active class and hide rules.
 exitBtn.addEventListener('click', function(){
     rulesContainer.classList.remove('active');
-})
+});
+
+submitBtn.addEventListener('click', saveScore);
 
 //if they click continue, it will hide rules and show game using active class.
 
 continueBtn.addEventListener('click', function() {
     rulesContainer.classList.remove('active');
+    resultContainer.classList.remove('active');
+    highscoreContainer.classList.remove('active');
     quizContainer.classList.add('active');
     //calls functions to display questions and start timer
     displayQuestions(0);
     updateCounter(1);
     startTimer(60);
 });
+//adding event listener to both replay buttons
+replayBtn.forEach(item => {
+    item.addEventListener('click', function() {
+        console.log('this works!');
+        timeLeft = 60;
+        score = 0;
+        questionNumber = 1;
+        questionCount = 0;
+        counter; 
+        penalty = false; 
+        gameOver = false;
+        rulesContainer.classList.remove('active');
+        resultContainer.classList.remove('active');
+        highscoreContainer.classList.remove('active');
+        quizContainer.classList.add('active');
+        //calls functions to display questions and start timer
+        displayQuestions(0);
+        updateCounter(1);
+        startTimer(60);
+    })
+});
+
+// replayBtn.addEventListener('click', function() {
+//     console.log('this works!');
+//     timeLeft = 60;
+//     score = 0;
+//     questionNumber = 1;
+//     questionCount = 0;
+//     counter; 
+//     penalty = false; 
+//     gameOver = false;
+//     // rulesContainer.classList.remove('active');
+//     // resultContainer.classList.remove('active');
+//     highscoreContainer.classList.remove('active');
+//     quizContainer.classList.add('active');
+//     //calls functions to display questions and start timer
+//     displayQuestions(0);
+//     updateCounter(1);
+//     startTimer(60);
+// });
+
+
 
 //function to get quiz questions from array and display them on html page
 
@@ -113,6 +167,7 @@ function showNext() {
         displayQuestions(questionCount);
         updateCounter(questionNumber);
     } else {
+        gameOver = true;
        setTimeout(showResults(), 1000);
     }
 };
@@ -135,7 +190,10 @@ function startTimer(time) {
         //change timer value in DOM 
         timeSeconds.textContent = time;
         time--; //decriment by 1 every second
-
+        //checking if gameover is true, stop timer if so.
+        if(gameOver) {
+            clearInterval(counter);
+        }
         //checking if penalty is true, subtracting 5 seconds if it is.
         if(penalty) {
             time = time - 5;
@@ -151,8 +209,9 @@ function startTimer(time) {
                 if(choiceList.children[i].textContent == correctAnswer) {
                     choiceList.children[i].classList.add('right-answer');
                 };
-            };
-
+            
+            };//show results when time runs out
+            setTimeout(showResults(), 1000);
         };
     };
 };
@@ -181,3 +240,10 @@ function showResults() {
 
     }
 }
+//function to save score to local storage
+function saveScore() {
+    localStorage.setItem(nameInput.value, score);
+    //display highscore page
+    resultContainer.classList.remove('active');
+    highscoreContainer.classList.add('active');
+};
