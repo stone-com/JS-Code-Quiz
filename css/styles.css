@@ -242,3 +242,13 @@ footer {
     pointer-events: auto;
     transform: translate(-50%, -50%) scale(1);
 }
+
+/* classes to change color on right/wrong answers */
+
+.right-answer {
+    background-color: rgb(45, 241, 45);
+}
+
+.wrong-answer {
+    background-color: rgb(189, 2, 2);
+}
