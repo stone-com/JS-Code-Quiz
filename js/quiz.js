@@ -74,24 +74,7 @@ replayBtn.forEach(item => {
     })
 });
 
-// replayBtn.addEventListener('click', function() {
-//     console.log('this works!');
-//     timeLeft = 60;
-//     score = 0;
-//     questionNumber = 1;
-//     questionCount = 0;
-//     counter; 
-//     penalty = false; 
-//     gameOver = false;
-//     // rulesContainer.classList.remove('active');
-//     // resultContainer.classList.remove('active');
-//     highscoreContainer.classList.remove('active');
-//     quizContainer.classList.add('active');
-//     //calls functions to display questions and start timer
-//     displayQuestions(0);
-//     updateCounter(1);
-//     startTimer(60);
-// });
+
 
 
 
