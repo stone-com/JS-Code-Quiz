@@ -18,6 +18,7 @@ let score = 0;
 let questionCount = 0;
 let questionNumber = 1;
 let counter; //used for timer
+let penalty = false; //used to penalize time for a wrong answer
 
 
 // if start button is clicked, add active class and show rules.
@@ -79,6 +80,12 @@ function answerSelected(x){
     } else {
         x.classList.add('wrong-answer'); // add wrong answer class to change color to red
         console.log('WRONG!!!');
+        //set penalty to true for 1 second, timer will catch it and subtract 5 sec (i hope)
+        penalty = true;
+        setTimeout(function() {
+            penalty =  false;
+        }, 1000);
+        
 
         //loop through choice list and find right answer, then color it green.
 
@@ -128,6 +135,11 @@ function startTimer(time) {
         //change timer value in DOM 
         timeSeconds.textContent = time;
         time--; //decriment by 1 every second
+
+        //checking if penalty is true, subtracting 5 seconds if it is.
+        if(penalty) {
+            time = time - 5;
+        }
 
         if(time< 0) { //if time is less than 0, stop counter
             clearInterval(counter);
