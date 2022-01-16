@@ -258,6 +258,7 @@ footer {
 .highscore-container {
   background: white;
   width: 400px;
+  height: fit-content;
   padding: 30px;
   border-radius: 15px;
   display: flex;
@@ -286,21 +287,29 @@ th {
 }
 
 .highscore-table {
-    width: 375px;
+  width: 375px;
 }
 .highscore-container .buttons {
-    display: flex;
-  }
+  display: flex;
+}
 .highscore-container .buttons button {
-    margin: 0 5px;
-    height:48px;
-    width: 100px;
-    border: 1px solid black;
-    border-radius: 15px;
-    margin-top: 15px;
-    font-size: 18px;
-    padding: 5px;
-  }
+  margin: 0 5px;
+  height: 48px;
+  width: 100px;
+  border: 1px solid black;
+  border-radius: 15px;
+  margin-top: 15px;
+  font-size: 18px;
+  padding: 5px;
+}
+
+.hs-title {
+  margin-bottom: 30px;
+  border-radius: 5px;
+  border: 1px solid black;
+  padding: 10px;
+  background-color: lightblue;
+}
 /* active class to show and hide different elements*/
 
 .active {

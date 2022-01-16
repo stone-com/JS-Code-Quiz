@@ -8,13 +8,14 @@ const quizContainer = document.querySelector(".quiz-container");
 const choiceList = document.querySelector(".choice-list");
 const resultContainer = document.querySelector(".result-container");
 const questionText = document.querySelector('.question-text')
-// const time_line = document.querySelector("header .time_line");
 const timeLabel = document.querySelector('.timer-label');
 const timeSeconds = document.querySelector('.time-seconds');
 const bottomCounter = document.querySelector('.question-total');
 const nameInput = document.querySelector('#name');
 const submitBtn = document.querySelector('#submit-btn');
 const highscoreContainer = document.querySelector('.highscore-container');
+const highscoreTable = document.querySelector('.highscore-table');
+const clearButton = document.querySelector('.clear');
 
 // const replayBtn = document.querySelector('#replay');
 const replayBtn = document.querySelectorAll('.replay');
@@ -27,6 +28,8 @@ let counter; //used for timer
 let penalty = false; //used to penalize time for a wrong answer
 
 let gameOver = false; //used to stop timer if game ends
+
+// let numScores = 0;
 
 
 // if start button is clicked, add active class and show rules.
@@ -68,6 +71,7 @@ replayBtn.forEach(item => {
         highscoreContainer.classList.remove('active');
         quizContainer.classList.add('active');
         //calls functions to display questions and start timer
+      
         displayQuestions(0);
         updateCounter(1);
         startTimer(60);
@@ -113,10 +117,8 @@ function answerSelected(x){
     if(userAnswer == correctAnswer) {
         score++; //add 1 to score if they get the right answer
         x.classList.add('right-answer'); //add right answer class to change color to green
-        console.log(score);
     } else {
         x.classList.add('wrong-answer'); // add wrong answer class to change color to red
-        console.log('WRONG!!!');
         //set penalty to true for 1 second, timer will catch it and subtract 5 sec (i hope)
         penalty = true;
         setTimeout(function() {
@@ -223,10 +225,84 @@ function showResults() {
 
     }
 }
+
+//highscore stuff
+//declare highscore variable as empty array or from localstorage
+const highScores = JSON.parse(localStorage.getItem('highScores')) || [];
+//function to save score
+function saveScore(e) {
+    //save score as object
+    let userScore = {
+        score: score,
+        name: nameInput.value
+    }
+//add user score object to highscores array
+highScores.push(userScore);
+//sorting the highscores from highest to lowest
+highScores.sort((a,b) => b.score - a.score);
+//splicing the array to only show top 4
+highScores.splice(4);
+//add to localstorage and turn to string
+localStorage.setItem('highScores', JSON.stringify(highScores));
+console.log(highScores);
+updateHighScores();
+//hide results and show highscores
+resultContainer.classList.remove('active');
+highscoreContainer.classList.add('active');
+}
+
+function updateHighScores() {
+//use map method to add table data for each item in highscores array
+highscoreTable.innerHTML = highScores.map(score => {
+    return '<tr><td>' + score.name + '</td><td>' + score.score + '</td></tr>'
+});
+}
+
+clearButton.addEventListener('click', function() {
+    localStorage.clear();
+    highscoreTable.innerHTML = "";
+})
+
+
+
+
+
+
 //function to save score to local storage
-function saveScore() {
-    localStorage.setItem(nameInput.value, score);
-    //display highscore page
-    resultContainer.classList.remove('active');
-    highscoreContainer.classList.add('active');
-};
+// function saveScore() {
+//     localStorage.setItem(nameInput.value, score);
+//     let userName = nameInput.value;
+//     let userScore = score;
+//     updateHighscores(userName, userScore);
+//     //display highscore page and hide result page
+//     resultContainer.classList.remove('active');
+//     highscoreContainer.classList.add('active');
+
+// };
+
+// // //function to update highscores
+
+// //function gets passed in numScores value, index of localstorage
+// let tableTitle = document.querySelector('.table-title');
+// function updateHighscores(name, score) {
+//         // create new table row element
+//         let newRow = document.createElement('tr');
+//         // create td elements for name and score
+//         let newName = document.createElement('td');
+//         let newScore = document.createElement('td');
+//         //update new table element values to last localstorage item
+//         newName.innerText = localStorage.name;
+//         newScore.innerText = localStorage.getItem(name);
+//         //append new elements to dom
+
+//         newRow.append(newName);
+//         newRow.append(newScore);
+//         highscoreTable.append(newRow); 
+// console.log(localStorage.name);
+// }
+
+// console.log(localStorage.key(numScores));
+// console.log( localStorage.getItem( localStorage.key( numScores ) ) );
+
+// console.log(numScores);
+
