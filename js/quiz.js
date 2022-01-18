@@ -29,8 +29,11 @@ let penalty = false; //used to penalize time for a wrong answer
 
 let gameOver = false; //used to stop timer if game ends
 
-// let numScores = 0;
+//use array.sort to randomize the questions array every time the quiz is loaded.
 
+questions.sort(function(a,b) {
+    return (Math.random() - 0.5)
+});
 
 // if start button is clicked, add active class and show rules.
 startBtn.addEventListener('click', function() {
@@ -59,6 +62,11 @@ continueBtn.addEventListener('click', function() {
 replayBtn.forEach(item => {
     item.addEventListener('click', function() {
         console.log('this works!');
+    
+        //shuffle order of quiz qestions again
+        questions.sort(function(a,b) {
+            return (Math.random() - 0.5)
+        });
         timeLeft = 60;
         score = 0;
         questionNumber = 1;
@@ -86,6 +94,12 @@ replayBtn.forEach(item => {
 
 function displayQuestions(i) {
     const questionText = document.querySelector('.question-text');
+
+    //randomize order of answer choices array using *sort* array method.
+
+    questions[i].choices.sort(function(a,b) {
+        return (Math.random() - 0.5)
+    });
 
     //make new variables containing new html elements for the questions and choices. getting value from array index.
     let questionNew = '<span>'+ questions[i].title +'</span>';
@@ -230,7 +244,7 @@ function showResults() {
 //declare highscore variable as empty array or from localstorage
 const highScores = JSON.parse(localStorage.getItem('highScores')) || [];
 //function to save score
-function saveScore(e) {
+function saveScore() {
     //save score as object
     let userScore = {
         score: score,
@@ -263,46 +277,4 @@ clearButton.addEventListener('click', function() {
     highscoreTable.innerHTML = "";
 })
 
-
-
-
-
-
-//function to save score to local storage
-// function saveScore() {
-//     localStorage.setItem(nameInput.value, score);
-//     let userName = nameInput.value;
-//     let userScore = score;
-//     updateHighscores(userName, userScore);
-//     //display highscore page and hide result page
-//     resultContainer.classList.remove('active');
-//     highscoreContainer.classList.add('active');
-
-// };
-
-// // //function to update highscores
-
-// //function gets passed in numScores value, index of localstorage
-// let tableTitle = document.querySelector('.table-title');
-// function updateHighscores(name, score) {
-//         // create new table row element
-//         let newRow = document.createElement('tr');
-//         // create td elements for name and score
-//         let newName = document.createElement('td');
-//         let newScore = document.createElement('td');
-//         //update new table element values to last localstorage item
-//         newName.innerText = localStorage.name;
-//         newScore.innerText = localStorage.getItem(name);
-//         //append new elements to dom
-
-//         newRow.append(newName);
-//         newRow.append(newScore);
-//         highscoreTable.append(newRow); 
-// console.log(localStorage.name);
-// }
-
-// console.log(localStorage.key(numScores));
-// console.log( localStorage.getItem( localStorage.key( numScores ) ) );
-
-// console.log(numScores);
 
