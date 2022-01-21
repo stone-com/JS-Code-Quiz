@@ -277,4 +277,6 @@ clearButton.addEventListener('click', function() {
     highscoreTable.innerHTML = "";
 })
 
+// comment
+
 
